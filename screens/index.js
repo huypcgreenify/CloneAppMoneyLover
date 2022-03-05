@@ -1,5 +1,5 @@
-// import Welcome from './welcome/Welcome'
-import Register from './Register'
+import Welcome from './welcome/Welcome'
+// import Register from './Register'
 // import Login from './Login'
 // import TransactionBook from './transactionbook/TransactionBook'
 // import AddWallet from './AddWallet'
