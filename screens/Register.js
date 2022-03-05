@@ -1,39 +1,39 @@
-import React, { useState } from "react"
-import { Text, View, Image, TouchableOpacity, ScrollView, useWindowDimensions, TextInput, Keyboard } from "react-native"
+import React, { useState, useEffect, useRef } from "react"
+import { Text, View, Image, TouchableOpacity, ScrollView, useWindowDimensions, TextInput } from "react-native"
 import { images, icons, colors, fontSizes } from '../constants'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import { isValidEmail, isValidPassword } from '../utilies/Validations'
 
-const Login = (props) => {
+const Register = (props) => {
 
     //Email&Pass - Validate...
     const [errorEmail, setErrorEmail] = useState('')
     const [errorPassword, setErrorPassword] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('huy272@gmail.com')
+    const [password, setPassword] = useState('123456789')
     const isValidtionOk = () => email.length > 0
         && password.length > 0
         && isValidEmail(email) == true
         && isValidPassword(password) == true
-    const [isSecureEntry, setIsSecureEntry] = useState(true)
 
     const { width } = useWindowDimensions()
 
-    // //function of navigation to/back
-    const { navigate, goBack } = props.navigation
+    const { navigation, route } = props
+    //function of navigation to/back
+    const { navigate, goBack } = navigation
 
     return <View style={{
         backgroundColor: 'white',
         flex: 1,
     }}>
         <ScrollView>
-            <TouchableOpacity
+            <TouchableOpacity style={{
+                padding: 15
+            }}
                 onPress={() => {
-                    goBack()
+                    goBack();
                 }}
-                style={{
-                    padding: 15
-                }}><Icon name={'arrow-left'} size={18} color={'black'} />
+            ><Icon name={'arrow-left'} size={18} color={'black'} />
             </TouchableOpacity>
             <View style={{
                 justifyContent: 'center',
@@ -42,7 +42,7 @@ const Login = (props) => {
                 <Text style={{
                     fontSize: fontSizes.h1,
                     color: 'black'
-                }}>Đăng nhập</Text>
+                }}>Đăng ký</Text>
                 <TouchableOpacity style={{
                     flexDirection: 'row',
                     borderWidth: 1,
@@ -115,7 +115,7 @@ const Login = (props) => {
                             borderTopRightRadius: 10,
                         }}
                         placeholder='Email'
-                        keyboardType='email-address'
+                        keyboardType='email'
                     />
 
                     <TextInput
@@ -133,21 +133,17 @@ const Login = (props) => {
                             borderBottomRightRadius: 10,
                         }}
                         placeholder='Mật khẩu'
-                        // keyboardType='password'
-                        secureTextEntry={isSecureEntry}
+                        keyboardType='password'
+                        secureTextEntry={true}
                     />
-                    <TouchableOpacity
-                        onPress={() => {
-                            setIsSecureEntry(!isSecureEntry)
-                        }}
-                        style={{
-                            position: 'absolute',
-                            bottom: 23,
-                            right: 25
-                        }}>
+                    <TouchableOpacity style={{
+                        position: 'absolute',
+                        bottom: 23,
+                        right: 25
+                    }}>
                         <Icon
-                            name={isSecureEntry ? 'eye' : 'eye-slash'}
-                        size={18}
+                            name={'eye'}
+                            size={18}
                         />
                     </TouchableOpacity>
                 </View>
@@ -158,13 +154,14 @@ const Login = (props) => {
                 {password.length > 0 ? (errorPassword ? <Text style={{ color: 'red', fontSize: fontSizes.h6, marginBottom: 10 }}>{errorPassword}</Text>
                     : <View></View>) : <View></View>
                 }
+
                 <View style={{
                     width: '65%',
                 }}>
                     <TouchableOpacity
                         disabled={!isValidtionOk() == true}
                         onPress={() => {
-                            navigate('UITabView')
+                            alert('alo')
                         }}
                         style={{
                             backgroundColor: isValidtionOk() == true ? colors.primary : colors.inactive,
@@ -177,39 +174,24 @@ const Login = (props) => {
                             padding: 8,
                             fontSize: fontSizes.h5,
                             color: 'white'
-                        }}>ĐĂNG NHẬP</Text>
+                        }}>ĐĂNG KÝ</Text>
                     </TouchableOpacity>
-                    <View style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between'
-                    }}>
-                        <TouchableOpacity
-                            onPress={() => {
-                                navigate('Register')
-                            }}
-                            style={{ padding: 5 }}>
-                            <Text style={{
-                                paddingVertical: 10,
-                                fontSize: fontSizes.h5,
-                                color: colors.primary,
-                            }}>Đăng ký</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={() => {
-
-                            }}
-                            style={{ padding: 5 }}>
-                            <Text style={{
-                                paddingVertical: 10,
-                                fontSize: fontSizes.h5,
-                                color: colors.primary,
-                            }}>Quên mật khẩu?</Text>
-                        </TouchableOpacity>
-                    </View>
+                    <TouchableOpacity
+                        onPress={() => {
+                            navigate('Login')
+                        }}
+                        style={{ padding: 5 }}>
+                        <Text style={{
+                            padding: 8,
+                            fontSize: fontSizes.h5,
+                            color: colors.primary,
+                            alignSelf: 'center'
+                        }}>Đăng nhập</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
-        </ScrollView>
-    </View>
+        </ScrollView >
+    </View >
 }
 
-export default Login
+export default Register

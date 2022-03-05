@@ -9,7 +9,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native'
-import { Login } from '../screens'
+import { Register } from '../screens'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import UITabView from './UITabView'
 
@@ -17,10 +17,10 @@ const Stack = createNativeStackNavigator()
 
 const App = (props) => {
     return <NavigationContainer style={{}}>
-        <Stack.Navigator initialRouteName='Login' screenOptions={{ headerShown: false }} >
+        <Stack.Navigator initialRouteName='Register' screenOptions={{ headerShown: false }} >
             {/* <Stack.Screen name={'Welcome'} component={Welcome}></Stack.Screen> */}
-            <Stack.Screen name={'Login'} component={Login}></Stack.Screen>
-            {/* <Stack.Screen name={'Register'} component={Register}></Stack.Screen> */}
+            {/* <Stack.Screen name={'Login'} component={Login}></Stack.Screen> */}
+            <Stack.Screen name={'Register'} component={Register}></Stack.Screen>
             {/* <Stack.Screen name={'UITabView'} component={UITabView}></Stack.Screen> */}
         </Stack.Navigator>
     </NavigationContainer >
